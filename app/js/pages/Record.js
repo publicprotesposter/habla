@@ -19,7 +19,10 @@ class Record extends Page{
     startRecording( stream ){
         this.isRecording = true
 
+        var AudioContext = window.AudioContext || window.webkitAudioContext
         var audio_context = new AudioContext
+
+        
         this.input = audio_context.createMediaStreamSource(stream);
         this.stream = stream
         if(this.input.context.createJavaScriptNode) this.audioNode = this.input.context.createJavaScriptNode(4096, 1, 1);
