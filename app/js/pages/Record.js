@@ -69,8 +69,7 @@ class Record extends Page{
         if( !this.isRecording ){
             this.encoder = new Worker('./../encoder.js')
             this.encoder.onmessage = (e) => {
-                if (e.data.cmd == 'end') {	
-                    console.log('made it ghere')			
+                if (e.data.cmd == 'end') {			
                     this.forceDownload(e.data.buf);
                     this.encoder.terminate();
                     this.encoder = null;	
@@ -96,7 +95,7 @@ class Record extends Page{
                 if( response.status == 200 ) return response.text()
             } )
             .then( ( myJson ) => {
-                this.posterCopy = myJson
+                this.posterCopy = myJson.toUpperCase()
                 this.nextPage()
             })
         }   

@@ -1,14 +1,11 @@
-# pppp-web
+# pppp-susurros
 
-## Dev environment for Public Protest Poster
 
-Run:
+Todo : 
 
-1. Install node + npm ( https://nodejs.org/es/download/ )
-2. $ npm i && npm start
-3. Visit in browser https://localhost:1234
-
-Build:
-
-1. $ npm run build
-2. Copy manually build files to Pro environment ( Not ideal, but that's life... 😞 )
+- [x] Cambiar estilo flechas
+- [x] Cambiar tipo de grabar, detener
+- [x] Cambiar forma boton
+- [ ] Añadir secuencia de colores y mensajes despues de grabar
+- [x] Cambiar textos por definitivos
+- [x] Posters, caja alta
