@@ -194,11 +194,24 @@ body
     transition transform 0.45s
     transform translate3d( 0vw, 0, 0 )
     &.record
+        .loaderBox
+            background #00ff00
+            display block
+            width calc( 100vw - 40px )
+            height calc( 100vh - 80px )
+            position absolute
+            bottom 40px
+            transform-origin 0 100%
+            transform scale( 1 , 0 )
+            &.animate
+                animation recordProcess 6s forwards
         .recordingInstruction
             display block
         .recordingMessage
             display none
         .analyzeMessage
+            display none
+        .designMessage
             display none
         &.recording
             .recordingInstruction
@@ -214,6 +227,19 @@ body
                 display none
             .analyzeMessage
                 display block
+            #recordBut
+                opacity 0
+        &.designing
+            .recordingInstruction
+                display none
+            .recordingMessage
+                display none
+            .analyzeMessage
+                display none
+            .designMessage
+                display block
+            #recordBut
+                opacity 0
             
 
     &.inlineEditor
@@ -314,7 +340,7 @@ p
 
 a
     color #ffffff
- 
+    
 #recordBut
     background #ff0000
     display block
@@ -394,3 +420,15 @@ a
     z-index 200
     pointer-events none
     display none
+
+@keyframes recordProcess
+    0%
+        background #ff00ff
+        transform scale( 1 , 0 )
+    33%
+        background #00ff00
+    66%
+        background #0000ff
+    100%
+        background #ff3300
+        transform scale( 1 , 0.5 )

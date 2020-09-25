@@ -63,6 +63,29 @@ class Record extends Page{
         this.node.classList.remove('recording')
         this.node.classList.add('analyizing')
         this.but.classList.remove( 'recording' )
+        this.node.querySelector( '.loaderBox' ).classList.add( 'animate' )
+
+        this.animationEnded = false
+
+        setTimeout( () => {
+            this.node.classList.remove('analyizing')
+            this.node.classList.add('designing')
+        }, 3000 )
+
+        setTimeout( () => {
+            this.animationEnded = true
+            this.checkFinished()
+        }, 6000 )
+    }
+
+    checkFinished(){
+        if( this.responseReady && this.animationEnded ) {
+            this.nextPage()
+            setTimeout( () => {
+                this.node.classList.remove('designing')
+                this.node.querySelector( '.loaderBox' ).classList.remove( 'animate' )
+            }, 2000 )
+        }
     }
 
     toggleRecord(){
@@ -82,12 +105,14 @@ class Record extends Page{
     }
 
     forceDownload( blob ){
+        this.responseReady = false
         var reader = new FileReader();
         reader.readAsDataURL(blob); 
         reader.onloadend = () => {
-            var audioData = reader.result.replace(/^data:audio\/flac;base64,/,'');             
-            fetch('https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/api',{ 
-            // fetch('http://localhost:5000/debug',{ 
+            var audioData = reader.result.replace(/^data:audio\/flac;base64,/,'');
+            var u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/api'
+            if( window.inLocal ) u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/debug'
+            fetch( u,{ 
             method: 'POST', 
             body: JSON.stringify( { data : audioData } ),
             headers:{ 'Content-Type': 'application/json' }
@@ -95,8 +120,10 @@ class Record extends Page{
                 if( response.status == 200 ) return response.text()
             } )
             .then( ( myJson ) => {
+                this.responseReady = true
+                this.checkFinished()
                 this.posterCopy = myJson.toUpperCase()
-                this.nextPage()
+                
             })
         }   
     }
