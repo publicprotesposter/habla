@@ -117,21 +117,15 @@ body
         .arrow
             font-size 48px
             position absolute
-            background-image url( './../assets/icons.svg' )
-            background-size 256px 256px
-            
-
             top 50%
             transform translate3d( 0, -50%, 0 )
             opacity 0
             &.right
                 right 0
-                background-position -78px -78px
             &.left
-                background-position -11px -78px
+                left 0
             &.menu
                 pointer-events none
-                background-position -11px -78px
         &[data-navitype="blockPrev"]
             .arrow.left
                 opacity 0.5
@@ -302,6 +296,16 @@ body
                     margin-top 5px
                     height calc( 70vw - 25px )
                     background-size cover
+                    position relative
+                    .signature
+                        position absolute
+                        top 0
+                        left 0
+                        width 100%
+                        height 100%
+                        background-image url( './../assets/firma.png' )
+                        background-size contain
+                        background-position center bottom
                     img
                         display block
             
@@ -311,7 +315,7 @@ body
     width 85vw
     height 124vw
     left 50%
-    transform translate3d( -50%, 0, 0 )
+    transform translate3d( -50%, -10px, 0 )
     text-align left
     background #000000
     color #ffffff

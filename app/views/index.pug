@@ -39,9 +39,9 @@ html
           span.en
             p We want to keep you up to date on our projections all over the place.
             p #[a(href='mailto:publicprotestposter@gmail.com') Send] us an email so we can send you our news.
-      .page.right( data-title ='Galeria', data-pid='gallery' )
+      .page.right( data-title ='Galeria', data-pid='gallery', data-class = 'Gallery' )
         .inner
-          p galeryyyy
+          ul.clearfix
       .page.right( data-title ='Contacto', data-pid='contacto' )
         .inner
           p.bodySized #[a(href="mailto:publicprotestposter@gmail.com") publicprotestposter@gmail.com] 
@@ -141,8 +141,8 @@ html
       .page( data-title ='ppp — susurros', data-pid='poster' )
         .inner
           p
-            .span.es Tu póster
-            .span.en Tu póster
+            span.es Tu póster
+            span.en Tu póster
           div#posterPreview
             .inner
 
@@ -163,9 +163,9 @@ html
       #menuBut
     #footer.navi
       .inner
-        span.arrow.left &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        span.arrow.right &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        span.arrow.menu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        span.arrow.left ←
+        span.arrow.right →
+        span.arrow.menu ←
     #desktopwarn
       .inner 
         .span.es Plataforma diseñada para su uso en dispositivos móviles.

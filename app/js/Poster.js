@@ -3,11 +3,12 @@ import TextToSVG from 'text-to-svg'
 
 class Poster{
     constructor(){
-        this.colors = [ '#000000', '#ff00ff', '#3a1c1f', '#966e1f', '#00ff00', '#eb5d40', '#660033', '#330066', '#00ffff', '#ff0000', '#003300', '#0000ff' ]
+        this.colors = [ '#000000', '#ff00ff', '#3a1c1f', '#966e1f', '#00ff00', '#eb5d40', '#660033', '#330066', '#ff0000', '#003300', '#0000ff' ]
         this.fonts = [
             [ 'TwoPointH-032ExtraLight', 'TwoPointH-096Regular', 'TwoPointH-160Bold', 'TwoPointH-192ExtraBold' ],
             [ 'TwoStrokeA21', 'TwoStrokeA22', 'TwoStrokeA23', 'TwoStrokeA24' ],
-            [ 'TwoTone-RightRegular', 'TwoTone-RightBold', 'TwoTone-LeftBold', 'TwoTone-LeftRegular' ]
+            [ 'TwoTone-RightRegular', 'TwoTone-RightBold', 'TwoTone-LeftBold', 'TwoTone-LeftRegular' ],
+            [ 'TwoLineASoft-096Regular.otf', 'TwoLineASoft-160Bold.otf', 'TwoPointI-096Regular.otf', 'TwoPointI-160Bold.otf' ]
         ]
 
         var g = Math.floor( Math.random() * this.fonts.length )
@@ -18,9 +19,19 @@ class Poster{
     
         document.getElementById( 'posterPreview' ).style.backgroundColor = this.colors[ Math.floor( Math.random() * this.colors.length ) ]
 
+        var aligns = [ 'left', 'middle', 'right' ]
+        this.align = aligns[ Math.floor( Math.random( ) * aligns.length ) ]
+        this.node.style['text-align'] = this.align
+
+        var sizes = [ 18, 24, 36, 48, 60 ]
+        this.fontSize = sizes[ Math.floor( Math.random( ) * sizes.length ) ]
+        this.node.style['font-size'] = this.fontSize + 'px'
+
+
         new FontFace( 'selected' , 'url(' + Fonts[ this.font ]+ ' )') .load().then( ( loaded_face ) => {
             document.fonts.add( loaded_face )
             this.node.style.fontFamily = 'selected'
+            
             this.node.dataset.font = 'selected'
             document.getElementById( 'posterPreview' ).style.fontFamily = 'selected'  
         })

@@ -22,20 +22,20 @@ var lang = 'es'
 
 var strings = {
     main : {
-        es : 'ppp —speech',
-        en : 'ppp —speech'
+        es : 'ppp — Habla',
+        en : 'ppp — Habla'
     },
     record : {
-        es : 'ppp —speech',
-        en : 'ppp —speech'
+        es : 'ppp — Habla',
+        en : 'ppp — Habla'
     },
     poster : {
-        es : 'ppp —speech',
-        en : 'ppp —speech',
+        es : 'ppp — Habla',
+        en : 'ppp — Habla',
     },
     thanks : {
-        es : 'ppp —speech',
-        en : 'ppp —speech',
+        es : 'ppp — Habla',
+        en : 'ppp — Habla',
     },
     news : {
         es : 'News',
