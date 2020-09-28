@@ -122,8 +122,9 @@ class Record extends Page{
             .then( ( myJson ) => {
                 this.responseReady = true
                 this.checkFinished()
-                this.posterCopy = myJson.toUpperCase()
-                
+                var words = myJson.split( ' ' )
+                var sliced = words.slice( 0, 7 )
+                this.posterCopy = sliced.join( ' ' ).toUpperCase()
             })
         }   
     }
