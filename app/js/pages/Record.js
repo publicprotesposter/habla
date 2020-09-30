@@ -20,7 +20,7 @@ class Record extends Page{
         this.isRecording = true
 
         var AudioContext = window.AudioContext || window.webkitAudioContext
-        var audio_context = new AudioContext
+        var audio_context = new AudioContext()
 
         
         this.input = audio_context.createMediaStreamSource(stream);
@@ -109,6 +109,7 @@ class Record extends Page{
                     this.encoder = null;	
                 }
             };
+            
             navigator.mediaDevices.getUserMedia( { audio: true, video: false } ).then( ( stream ) => this.startRecording( stream ) )
         } else {
             this.stopRecording()
@@ -134,7 +135,7 @@ class Record extends Page{
                 var words = myJson.split( ' ' )
                 this.responseReady = true
                 this.checkFinished( )
-                var sliced = words.slice( 0, 7 )
+                var sliced = words.slice( 0, 8 )
                 this.posterCopy = sliced.join( ' ' ).toUpperCase()
                 // this.posterCopy = ''
             })

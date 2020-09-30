@@ -129,7 +129,7 @@ class Poster{
 
         
         this.node.innerHTML = data.copy
-        while( this.node.offsetHeight > document.getElementById( 'posterPreview' ).offsetHeight * 0.8 ){
+        while( this.node.offsetHeight > document.getElementById( 'posterPreview' ).offsetHeight * ( 0.8 - Math.random() * 0.2 ) ){
             this.fontSize -= 5
             this.node.style['font-size'] = this.fontSize + 'px'
             this.node.style['line-height'] = this.fontSize * 0.9 + 'px'
