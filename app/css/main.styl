@@ -207,6 +207,8 @@ body
             display none
         .designMessage
             display none
+        .recordingError
+            display none
         &.recording
             .recordingInstruction
                 display none
@@ -234,6 +236,17 @@ body
                 display block
             #recordBut
                 opacity 0
+        &.recordingError
+            .recordingInstruction
+                display none
+            .recordingMessage
+                display none
+            .analyzeMessage
+                display none
+            .designMessage
+                display none
+            .recordingError
+                display block
             
 
     &.inlineEditor
@@ -306,6 +319,7 @@ body
                         background-image url( './../assets/firma.png' )
                         background-size contain
                         background-position center bottom
+                        background-repeat no-repeat
                     img
                         display block
             
@@ -315,7 +329,7 @@ body
     width 85vw
     height 124vw
     left 50%
-    transform translate3d( -50%, -10px, 0 )
+    transform translate3d( -50%, -15px, 0 )
     text-align left
     background #000000
     color #ffffff
@@ -330,7 +344,7 @@ body
         width 90%
         margin 10px
         // top 50%
-        // left 50%
+        // left 50%w
         // transform translate3d( -50%, -50%, 0 )
         // background rgba( 0, 0, 0, 0.05 )
         // transition transform 0.4s

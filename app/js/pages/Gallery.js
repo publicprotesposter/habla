@@ -6,8 +6,7 @@ class Gallery extends Page{
     constructor( p ){
         super( p )
         
-        if( !window.inLocal ) this.fetchGallery()
-        else this.fetchLocal()
+        
     }
 
     fetchGallery(){
@@ -25,6 +24,11 @@ class Gallery extends Page{
         dump.items.forEach( f => {
             if( f.mimeType == 'image/svg+xml' ) this.addItem( f )
         })
+    }
+
+    onEnterPage(){
+        if( !window.inLocal ) this.fetchGallery()
+        else this.fetchLocal()
     }
 
     addItem( f ){

@@ -3,7 +3,7 @@ import Page from '../Page'
 class Upload extends Page{
     constructor( p ){
         super( p )
-        
+        document.querySelector( '.souvenirNavi' ).addEventListener( 'click', () => this.emit( 'updateFlow' , { action : 'souvenirRequest', data : { } } ) )
     }
 
     onEnterPage(){

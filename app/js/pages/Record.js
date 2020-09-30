@@ -67,7 +67,7 @@ class Record extends Page{
 
         this.animationEnded = false
 
-        setTimeout( () => {
+        this.designingTimeout = setTimeout( () => {
             this.node.classList.remove('analyizing')
             this.node.classList.add('designing')
         }, 3000 )
@@ -80,6 +80,16 @@ class Record extends Page{
 
     checkFinished(){
         if( this.responseReady && this.animationEnded ) {
+            
+            if( this.posterCopy == '' ) {
+                console.log('error')
+                this.node.querySelector( '.loaderBox' ).classList.remove( 'animate' )
+                
+                this.node.classList.remove('designing')
+                this.node.classList.remove('analyzing')
+                this.node.classList.add('recordingError')
+                return
+            }
             this.nextPage()
             setTimeout( () => {
                 this.node.classList.remove('designing')
@@ -90,6 +100,7 @@ class Record extends Page{
 
     toggleRecord(){
         if( !this.isRecording ){
+            this.node.classList.remove('recordingError')
             this.encoder = new Worker('./../encoder.js')
             this.encoder.onmessage = (e) => {
                 if (e.data.cmd == 'end') {			
@@ -120,11 +131,12 @@ class Record extends Page{
                 if( response.status == 200 ) return response.text()
             } )
             .then( ( myJson ) => {
-                this.responseReady = true
-                this.checkFinished()
                 var words = myJson.split( ' ' )
+                this.responseReady = true
+                this.checkFinished( )
                 var sliced = words.slice( 0, 7 )
                 this.posterCopy = sliced.join( ' ' ).toUpperCase()
+                // this.posterCopy = ''
             })
         }   
     }

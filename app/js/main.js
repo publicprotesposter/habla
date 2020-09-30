@@ -68,6 +68,10 @@ var strings = {
     credits : {
         es : 'Créditos',
         en : 'Credits'
+    },
+    souvenir : {
+        es : 'Souvenir',
+        en : 'Souvenir'
     }
 }
 
@@ -96,6 +100,9 @@ class Flow{
                 this.navigate( ++this.page )
                 poster.update( e.data )
                 break;
+            case 'souvenirRequest':
+                this.navigate( ++this.page )
+                break;
             default: console.log( 'no idea ')
         }
     }
@@ -112,7 +119,7 @@ class Flow{
         currentPage.classList.add( 'active' )
         currentPage.classList.remove( 'left' )
         currentPage.classList.remove( 'right' )
-
+        // console.log('here')
         this.pages[ this.page ].onEnterPage()
         // if( this.page > 0 ) this.pages[ this.page - 1 ].onLeavePage()
 
@@ -147,13 +154,19 @@ class Menu{
 
         Object.values( document.querySelectorAll( '.menuItem' ) ).forEach( m => {
             m.addEventListener( 'click', ( e ) => {
+                console.log( e.target.dataset.target )
                 this.node.querySelector( '.page[data-pid=menu]' ).classList.add( 'left' )
                 this.node.querySelector( '.page[data-pid=menu]' ).classList.remove( 'active' )
                 this.node.querySelector( '.page[data-pid=' + e.target.dataset.target + ']' ).classList.remove( 'right' )
                 this.node.querySelector( '.page[data-pid=' + e.target.dataset.target + ']' ).classList.add( 'active' )
                 this.active = e.target.dataset.target
                 var headerTitle = document.querySelector( '#pageTitle' )
-
+                var pageName = e.target.dataset.target.charAt(0).toUpperCase() + e.target.dataset.target.slice(1)
+                
+                this.pages.forEach( p => {
+                   if( p.constructor.name == pageName ) p.onEnterPage()
+                } )
+                
                 headerTitle.innerHTML = strings[ e.target.dataset.target ][ lang ]
             } )
         } ) 
