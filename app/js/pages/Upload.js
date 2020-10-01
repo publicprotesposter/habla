@@ -3,10 +3,11 @@ import Page from '../Page'
 class Upload extends Page{
     constructor( p ){
         super( p )
-        document.querySelector( '.souvenirNavi' ).addEventListener( 'click', () => this.emit( 'updateFlow' , { action : 'souvenirRequest', data : { } } ) )
+        // document.querySelector( '.souvenirNavi' ).addEventListener( 'click', () => this.emit( 'updateFlow' , { action : 'souvenirRequest', data : { } } ) )
     }
 
     onEnterPage(){
+        if( window.inLocal ) return console.log('not send because local')
         var vector = document.getElementsByTagName( 'svg' )[ 0 ]
         fetch('https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/upload',{ 
             method: 'post', 

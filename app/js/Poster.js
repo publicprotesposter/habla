@@ -19,18 +19,23 @@ class Poster{
         this.fonts = [
             [ 'TwoPointH-032ExtraLight', 'TwoPointH-096Regular', 'TwoPointH-160Bold', 'TwoPointH-192ExtraBold' ],
             [ 'TwoStrokeA21', 'TwoStrokeA22', 'TwoStrokeA23', 'TwoStrokeA24' ],
-            [ 'TwoTone-TopRegular', 'TwoTone-TopBold', 'TwoTone-LeftBold', 'TwoTone-LeftRegular' ],
+            [ 'TwoTone-TopRegular', 'TwoTone-TopBold', 'TwoTone-LeftBold', 'TwoTone-LeftRegular', 'TwoTone_BaseBold', 'TwoTone_BaseRegular' ],
             [ 'TwoLineASoft-096Regular', 'TwoLineASoft-160Bold' ],
-            [ 'TwoPointI-096Regular', 'TwoPointI-160Bold' ]
+            [ 'TwoPointI-096Regular', 'TwoPointI-160Bold' ],
+            [ 'TwoBitE-160Bold', 'TwoBit_E_256_Fat', 'TwoBitE-096Regular' ],
+            [ 'TwoLine_A_Soft_064_Light', 'TwoLine_A_Soft_096_Regular', 'TwoLine_A_Soft_160_Bold' ],
+            [ 'TwoLineBHard-064Light', 'TwoLineBHard-096Regular', 'TwoLineBHard-160Bold' ]
+
         ]
 
         var g = Math.floor( Math.random() * this.fonts.length )
         var f = Math.floor( Math.random() * this.fonts[ g ].length )
         this.font = this.fonts[ g ][ f ]
+        // this.font = this.fonts[ 7 ][ 2 ]
         console.log( this.font )
         this.node = document.getElementById( 'posterPreview' ).children[ 0 ]
     
-        document.getElementById( 'posterPreview' ).style.backgroundColor = this.bgColors[ s.getHours().toLocaleString() % 4 ][ Math.round( s.getMinutes() / 2 ) ]
+        document.getElementById( 'posterPreview' ).style.backgroundColor = this.bgColors[ s.getHours().toLocaleString() % 4 ][ Math.round( Math.random() * 30 ) ]
 
         var aligns = [ 'left', 'center', 'right' ]
         this.align = aligns[ Math.floor( Math.random( ) * aligns.length ) ]
@@ -126,9 +131,12 @@ class Poster{
     }
 
     update( data ){
-
+        var words = data.copy.split( ' ' )
+        var sliced = words.slice( 0, 8 )
+        var posterCopy = sliced.join( ' ' ).toUpperCase()
+        console.log( posterCopy )
         
-        this.node.innerHTML = data.copy
+        this.node.innerHTML = posterCopy
         while( this.node.offsetHeight > document.getElementById( 'posterPreview' ).offsetHeight * ( 0.8 - Math.random() * 0.2 ) ){
             this.fontSize -= 5
             this.node.style['font-size'] = this.fontSize + 'px'

@@ -55,7 +55,7 @@ class Record extends Page{
 		for(var i = tracks.length - 1; i >= 0; --i) tracks[i].stop();
 		this.isRecording = false
 		this.encoder.postMessage({ cmd: 'finish' });
-
+        clearTimeout( this.recordTimer )
 		this.input.disconnect();
 		this.audioNode.disconnect();
         this.input = this.audioNode = null;
@@ -72,7 +72,7 @@ class Record extends Page{
             this.node.classList.add('designing')
         }, 3000 )
 
-        setTimeout( () => {
+        this.animateTimeout = setTimeout( () => {
             this.animationEnded = true
             this.checkFinished()
         }, 6000 )
@@ -81,15 +81,19 @@ class Record extends Page{
     checkFinished(){
         if( this.responseReady && this.animationEnded ) {
             
-            if( this.posterCopy == '' ) {
+            if( this.posterCopy == '' || this.posterCopy == ' ' || this.posterCopy == null ) {
                 console.log('error')
                 this.node.querySelector( '.loaderBox' ).classList.remove( 'animate' )
+                clearTimeout( this.designingTimeout )
+                clearTimeout( this.animateTimeout )
                 
                 this.node.classList.remove('designing')
                 this.node.classList.remove('analyzing')
                 this.node.classList.add('recordingError')
                 return
             }
+
+
             this.nextPage()
             setTimeout( () => {
                 this.node.classList.remove('designing')
@@ -123,7 +127,7 @@ class Record extends Page{
         reader.onloadend = () => {
             var audioData = reader.result.replace(/^data:audio\/flac;base64,/,'');
             var u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/api'
-            if( window.inLocal ) u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/debug'
+            // if( window.inLocal ) u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/debug'
             fetch( u,{ 
             method: 'POST', 
             body: JSON.stringify( { data : audioData } ),
@@ -132,12 +136,9 @@ class Record extends Page{
                 if( response.status == 200 ) return response.text()
             } )
             .then( ( myJson ) => {
-                var words = myJson.split( ' ' )
+                this.posterCopy = myJson
                 this.responseReady = true
                 this.checkFinished( )
-                var sliced = words.slice( 0, 8 )
-                this.posterCopy = sliced.join( ' ' ).toUpperCase()
-                // this.posterCopy = ''
             })
         }   
     }
