@@ -126,7 +126,7 @@ class Record extends Page{
         reader.readAsDataURL(blob); 
         reader.onloadend = () => {
             var audioData = reader.result.replace(/^data:audio\/flac;base64,/,'');
-            var u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/api'
+            var u = 'https://susurros.herokuapp.com/api'
             // if( window.inLocal ) u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/debug'
             fetch( u,{ 
             method: 'POST', 
