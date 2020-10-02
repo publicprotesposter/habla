@@ -15,6 +15,7 @@ class Gallery extends Page{
         var url = "https://www.googleapis.com/drive/v2/files?q='" + folderId + "'+in+parents&key=" + api_key + "&orderBy=modifiedDate desc";
         fetch(url).then(function(response) { return response.json(); }).then( (myJson) => {
             myJson.items.forEach( f => {
+                console.log( f )
                 if( f.mimeType == 'image/svg+xml' ) this.addItem( f )
             })
         });
@@ -27,8 +28,8 @@ class Gallery extends Page{
     }
 
     onEnterPage(){
-        if( !window.inLocal ) this.fetchGallery()
-        else this.fetchLocal()
+        this.fetchGallery()
+        
     }
 
     addItem( f ){
