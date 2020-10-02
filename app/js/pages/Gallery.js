@@ -12,7 +12,7 @@ class Gallery extends Page{
     fetchGallery(){
         var api_key = 'AIzaSyC8y5mzWn4GeKgezS4_s1j0OZ4wg5cATVY';
         var folderId = '1ol-3_PGZ226BbCBIGMcQPTZB0f96LX0a';
-        var url = "https://www.googleapis.com/drive/v2/files?q='" + folderId + "'+in+parents&key=" + api_key + "&orderBy=modifiedDate desc";
+        var url = "https://cors-anywhere.herokuapp.com/https://www.googleapis.com/drive/v2/files?q='" + folderId + "'+in+parents&key=" + api_key + "&orderBy=modifiedDate desc";
         fetch(url).then(function(response) { return response.json(); }).then( (myJson) => {
             myJson.items.forEach( f => {
                 console.log( f )
