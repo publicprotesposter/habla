@@ -20,7 +20,7 @@ class Record extends Page{
         this.isRecording = true
 
         var AudioContext = window.AudioContext || window.webkitAudioContext
-        var audio_context = new AudioContext()
+        var audio_context = new AudioContext
 
         
         this.input = audio_context.createMediaStreamSource(stream);
