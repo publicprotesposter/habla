@@ -7,9 +7,10 @@ class Upload extends Page{
     }
 
     onEnterPage(){
-        if( window.inLocal ) return console.log('not send because local')
+        // if( window.inLocal ) return console.log('not send because local')
         var vector = document.getElementsByTagName( 'svg' )[ 0 ]
         fetch('https://susurros.herokuapp.com/upload',{ 
+        // fetch('http://localhost:5000/upload',{             
             method: 'post', 
             body: JSON.stringify( { 
                 data : new XMLSerializer().serializeToString( vector ),

@@ -2,6 +2,10 @@ import Page from '../Page'
 
 import dump from './../galleryDump.json'
 
+import 'regenerator-runtime/runtime'
+
+
+
 class Gallery extends Page{
     constructor( p ){
         super( p )
@@ -10,7 +14,7 @@ class Gallery extends Page{
     }
 
     fetchGallery(){
-        console.log('here')
+        
         var api_key = 'AIzaSyC8y5mzWn4GeKgezS4_s1j0OZ4wg5cATVY';
         var folderId = '1ol-3_PGZ226BbCBIGMcQPTZB0f96LX0a';
         var url = "https://cors-anywhere.herokuapp.com/https://www.googleapis.com/drive/v2/files?q='" + folderId + "'+in+parents&key=" + api_key + "&orderBy=modifiedDate desc";
@@ -29,8 +33,10 @@ class Gallery extends Page{
     }
 
     onEnterPage(){
-        console.log('hgo')
+
         this.fetchGallery()
+
+        
         
     }
 
@@ -59,6 +65,17 @@ class Gallery extends Page{
         var imgCont = document.createElement( 'div' )
         imgCont.classList.add( 'imgCont' )
         listItem.appendChild( imgCont )
+        // try {
+        //     gapi.client.drive.files.get({
+        //         fileId: f.id,
+        //         alt: "media"
+        //     }).then( (res) => {
+        //         console.log( res.body )
+        //     });
+        // } catch (e) {
+        //     console.error(e);
+        // }
+
         imgCont.style.backgroundImage = 'url( "https://drive.google.com/uc?id=' + f.id + '" )'
         
         var signature = document.createElement( 'div' )
