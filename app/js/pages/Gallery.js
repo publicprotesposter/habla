@@ -29,7 +29,6 @@ class Gallery extends Page{
     }
 
     onEnterPage(){
-        
         console.log('hgo')
         this.fetchGallery()
         
