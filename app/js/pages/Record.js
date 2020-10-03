@@ -122,25 +122,29 @@ class Record extends Page{
 
     forceDownload( blob ){
         this.responseReady = false
-        var reader = new FileReader();
-        reader.readAsDataURL(blob); 
-        reader.onloadend = () => {
-            var audioData = reader.result.replace(/^data:audio\/flac;base64,/,'');
-            var u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/api'
-            // if( window.inLocal ) u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/debug'
-            fetch( u,{ 
-            method: 'POST', 
-            body: JSON.stringify( { data : audioData } ),
-            headers:{ 'Content-Type': 'application/json' }
-            } ).then( (response) => { 
-                if( response.status == 200 ) return response.text()
-            } )
-            .then( ( myJson ) => {
-                this.posterCopy = myJson
-                this.responseReady = true
-                this.checkFinished( )
-            })
-        }   
+
+        this.posterCopy = 'SE ACABÓ'
+        this.responseReady = true
+        this.checkFinished( )
+        // var reader = new FileReader();
+        // reader.readAsDataURL(blob); 
+        // reader.onloadend = () => {
+        //     var audioData = reader.result.replace(/^data:audio\/flac;base64,/,'');
+        //     var u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/api'
+        //     // if( window.inLocal ) u = 'https://cors-anywhere.herokuapp.com/https://susurros.herokuapp.com/debug'
+        //     fetch( u,{ 
+        //     method: 'POST', 
+        //     body: JSON.stringify( { data : audioData } ),
+        //     headers:{ 'Content-Type': 'application/json' }
+        //     } ).then( (response) => { 
+        //         if( response.status == 200 ) return response.text()
+        //     } )
+        //     .then( ( myJson ) => {
+        //         this.posterCopy = myJson
+        //         this.responseReady = true
+        //         this.checkFinished( )
+        //     })
+        // }   
     }
 
     nextPage(){
